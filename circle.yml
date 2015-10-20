@@ -2,4 +2,4 @@ deployment:
     staging:
         branch: master
         heroku:
-            app-name: app-store-app
+            appname: app-store-app

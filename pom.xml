@@ -9,7 +9,7 @@
     <description>It's a app store</description>
     <properties>
         <tomcat.version>7.0.57</tomcat.version>
-        <evironment>staging</evironment>
+        <environment>staging</environment>
     </properties>
     <build>
         <sourceDirectory>src</sourceDirectory>
@@ -31,9 +31,26 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+            
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <property environment="env" />
+                                <echoproperties />
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
-
-
     </build>
     <profiles>
         <profile>
@@ -59,10 +76,10 @@
         </profile>
 
         <profile>
+            <id>heroku</id>
             <activation>
                 <property>
-                    <name>environment</name>
-                    <value>staging</value>
+                    <name>env.DYNO</name>
                 </property>
             </activation>
             <build>

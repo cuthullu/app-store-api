@@ -1,5 +1,5 @@
 deployment:
-	staging:
-		branch: master
-		heroku:
-			app-name: app-store-app
+    staging:
+        branch: master
+        heroku:
+            app-name: app-store-app

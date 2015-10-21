@@ -1,4 +1,4 @@
-package com.scottlogic.thull.appstore.api.resources;
+package integration.com.scottlogic.thull.appstore.api.resources;
 
 import javax.ws.rs.core.Application;
 
@@ -6,6 +6,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Assert;
 import org.junit.Test;
+import com.scottlogic.thull.appstore.api.resources.HelloService;
 
 
 

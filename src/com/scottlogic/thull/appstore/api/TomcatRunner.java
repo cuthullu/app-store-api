@@ -1,4 +1,4 @@
-package com.scottlogic.thull.appstore.api.services;
+package com.scottlogic.thull.appstore.api;
 
 import java.io.File;
 

@@ -1,4 +1,4 @@
-package com.scottlogic.thull.appstore.api.services;
+package com.scottlogic.thull.appstore.api.resources;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -11,7 +11,6 @@ import javax.ws.rs.core.Response;
 public class HelloService {
 	
 	@GET
-	@Path("/")
 	public Response getHello(){
 		return Response.ok("hello").build();
 	}

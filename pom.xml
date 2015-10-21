@@ -9,6 +9,7 @@
     <description>It's a app store</description>
     <properties>
         <tomcat.version>7.0.57</tomcat.version>
+        <jersey.version>2.22.1</jersey.version>
         <environment>staging</environment>
     </properties>
     <build>
@@ -146,19 +147,19 @@
             <version>${tomcat.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.sun.jersey</groupId>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-common</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-server</artifactId>
-            <version>1.19</version>
+            <version>${jersey.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-bundle</artifactId>
-            <version>1.19</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-core</artifactId>
-            <version>1.19</version>
+            <groupId>org.glassfish.jersey.test-framework.providers</groupId>
+            <artifactId>jersey-test-framework-provider-inmemory</artifactId>
+            <version>${jersey.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
@@ -170,5 +171,7 @@
             <artifactId>resteasy-jackson-provider</artifactId>
             <version>3.0.6.Final</version>
         </dependency>
+
+        
     </dependencies>
 </project>

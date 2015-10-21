@@ -4,6 +4,8 @@ import java.io.File;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.startup.Tomcat;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 public class TomcatRunner {
 
@@ -11,6 +13,12 @@ public class TomcatRunner {
 
         String webappDirLocation = "WebContent/";
         Tomcat tomcat = new Tomcat();
+        
+        Configuration cfg = new Configuration();
+        SessionFactory sessionFactory = cfg.buildSessionFactory();
+        cfg.setProperty("hibernate.connection.url", System.getenv("DATABASE_URL"));
+        cfg.setProperty("hibernate.connection.url", System.getenv("DATABASE_URL"));
+        cfg.setProperty("hibernate.connection.url", System.getenv("DATABASE_URL"));
 
         //The port that we should run on can be set into an environment variable
         //Look for that variable and default to 8080 if it isn't there.

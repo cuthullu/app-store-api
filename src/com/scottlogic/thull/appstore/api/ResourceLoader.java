@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.ws.rs.core.Application;
-
 import com.scottlogic.thull.appstore.api.resources.HelloService;
  
 public class ResourceLoader extends Application{

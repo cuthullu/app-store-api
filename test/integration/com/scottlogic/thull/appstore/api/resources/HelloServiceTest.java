@@ -21,7 +21,7 @@ public class HelloServiceTest extends JerseyTest {
 	@Test
 	public void test() {
 		final String hello = target("hello").request().get(String.class);
-		Assert.assertEquals("hello", hello);
+		Assert.assertEquals("[]", hello);
 	}
 
 }

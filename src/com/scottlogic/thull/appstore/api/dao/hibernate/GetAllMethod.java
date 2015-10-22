@@ -1,4 +1,4 @@
-package com.scottlogic.thull.appstore.api.dao.HibernateDao;
+package com.scottlogic.thull.appstore.api.dao.hibernate;
 
 import java.util.List;
 

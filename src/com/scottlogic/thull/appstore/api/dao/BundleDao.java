@@ -7,4 +7,8 @@ import com.scottlogic.thull.appstore.api.domains.Bundle;
 public interface BundleDao {
 	
 	public List<Bundle> getAllBundles();
+	
+	public Bundle getBundle(Integer id);
+	
+	public Integer createBundle(Bundle bundle);
 }

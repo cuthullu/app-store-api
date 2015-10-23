@@ -16,6 +16,15 @@ public class HibernateUtil {
 		LOG.info("Creating hibernate session factory");
 		try {
 			Configuration cfg = new Configuration().configure();
+			/**
+			 * Testing database config
+			 */
+			if(System.getenv("APP_STORE_RUN_ENV") != null && 
+					System.getenv("APP_STORE_RUN_ENV").equalsIgnoreCase("test")) {
+				
+				LOG.info("Creating database with CREATE-DROP option");
+				cfg.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+			}
 			cfg.setProperty("hibernate.connection.url", "jdbc:mysql://" + System.getenv("DATABASE_URL"));
 			cfg.setProperty("hibernate.connection.username", System.getenv("DATABASE_USER"));
 			cfg.setProperty("hibernate.connection.password", System.getenv("DATABASE_PASSWORD"));

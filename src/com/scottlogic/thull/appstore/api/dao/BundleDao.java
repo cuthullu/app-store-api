@@ -11,4 +11,8 @@ public interface BundleDao {
 	public Bundle getBundle(Integer id);
 	
 	public Integer createBundle(Bundle bundle);
+	
+	public Bundle updateBundle(Bundle bundle);
+	
+	public Boolean deleteBundle(Integer id);
 }

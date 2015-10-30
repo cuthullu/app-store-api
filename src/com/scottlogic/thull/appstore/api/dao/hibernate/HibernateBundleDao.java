@@ -29,6 +29,16 @@ public class HibernateBundleDao implements BundleDao {
 	public Bundle getBundle(Integer id) {
 		return callDatabase(id, new GetMethod());
 	}
+	
+	@Override
+	public Bundle updateBundle(Bundle bundle) {
+		return callDatabase(bundle, new UpdateMethod());
+	}
+	
+	@Override
+	public Boolean deleteBundle(Integer id) {
+		return callDatabase(id, new DeleteMethod());
+	}
 
 	private <I, O> O callDatabase(I input, HibernateMethod<I, O> method) {
 		LOG.debug("Calling database using hibernate with: " + method.getClass().getSimpleName());

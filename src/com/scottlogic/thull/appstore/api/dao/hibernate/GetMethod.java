@@ -9,10 +9,7 @@ public class GetMethod implements HibernateMethod<Integer, Bundle> {
 
 	@Override
 	public Bundle call(Session session, Integer input) {
-		String queryString = "from Bundle where id = :id";
-		Query query = session.createQuery(queryString);
-		query.setInteger("id", input);
-		return (Bundle) query.uniqueResult();
+		return (Bundle) session.get(Bundle.class, input);
 	}
 
 }

@@ -1,6 +1,5 @@
 package com.scottlogic.thull.appstore.api.resources;
 
-import java.net.URI;
 import java.util.List;
 
 import javax.validation.ConstraintViolationException;

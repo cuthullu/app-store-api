@@ -1,6 +1,5 @@
 package com.scottlogic.thull.appstore.api.dao.hibernate;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.scottlogic.thull.appstore.api.domains.Bundle;

@@ -2,9 +2,6 @@ package integration.com.scottlogic.thull.appstore.api.resources;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
@@ -16,7 +13,6 @@ import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.owlike.genson.Genson;
 import com.scottlogic.thull.appstore.api.domains.Bundle;
 import com.scottlogic.thull.appstore.api.exception.mapper.ConstraintViolationMapper;
 import com.scottlogic.thull.appstore.api.resources.BundleService;

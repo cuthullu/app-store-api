@@ -2,7 +2,6 @@ package integration.com.scottlogic.thull.appstore.api.resources;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
@@ -51,7 +50,7 @@ public class BundleServiceReadTest extends JerseyTest {
 		
 		
 		Assert.assertEquals(200, getResponse.getStatus());
-		Assert.assertEquals(bundle.getId(), bundle.getId());
+		Assert.assertEquals(bundle.getId(), gottenBundle.getId());
 	}
 	
 	@Test

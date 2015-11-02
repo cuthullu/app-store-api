@@ -9,6 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.scottlogic.thull.appstore.api.dao.BundleDao;
+import com.scottlogic.thull.appstore.api.dao.hibernate.bundle.CreateMethod;
+import com.scottlogic.thull.appstore.api.dao.hibernate.bundle.DeleteMethod;
+import com.scottlogic.thull.appstore.api.dao.hibernate.bundle.GetAllMethod;
+import com.scottlogic.thull.appstore.api.dao.hibernate.bundle.GetMethod;
+import com.scottlogic.thull.appstore.api.dao.hibernate.bundle.UpdateMethod;
 import com.scottlogic.thull.appstore.api.domains.Bundle;
 import com.scottlogic.thull.appstore.api.utils.HibernateUtil;
 

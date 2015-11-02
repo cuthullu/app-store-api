@@ -1,9 +1,10 @@
-package com.scottlogic.thull.appstore.api.dao.hibernate;
+package com.scottlogic.thull.appstore.api.dao.hibernate.bundle;
 
 import java.util.List;
 
 import org.hibernate.Session;
 
+import com.scottlogic.thull.appstore.api.dao.hibernate.HibernateMethod;
 import com.scottlogic.thull.appstore.api.domains.Bundle;
 
 public class GetAllMethod implements HibernateMethod<Integer, List<Bundle>>{

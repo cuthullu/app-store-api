@@ -15,7 +15,7 @@ public class ResourceLoader extends Application{
 	static final Logger LOG = LoggerFactory.getLogger(ResourceLoader.class);
     @Override
     public Set<Class<?>> getClasses() {
-        final Set<Class<?>> classes = new HashSet<Class<?>>();
+        final Set<Class<?>> classes = new HashSet<Class<?>>(); 
         
         LOG.info("ResourceLoader request for classes made");
 

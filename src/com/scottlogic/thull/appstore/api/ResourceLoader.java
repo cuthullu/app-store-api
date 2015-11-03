@@ -18,7 +18,7 @@ public class ResourceLoader extends Application{
         final Set<Class<?>> classes = new HashSet<Class<?>>();
         
         LOG.info("ResourceLoader request for classes made");
-        
+
         classes.add(BundleService.class);
         LOG.info("BundleService resource added");
         return classes;

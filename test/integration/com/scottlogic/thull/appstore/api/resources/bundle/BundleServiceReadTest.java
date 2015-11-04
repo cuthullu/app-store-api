@@ -1,4 +1,4 @@
-package integration.com.scottlogic.thull.appstore.api.resources;
+package integration.com.scottlogic.thull.appstore.api.resources.bundle;
 
 import java.net.URI;
 import java.net.URISyntaxException;

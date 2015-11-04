@@ -1,4 +1,4 @@
-package integration.com.scottlogic.thull.appstore.api.resources;
+package integration.com.scottlogic.thull.appstore.api.resources.bundle;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;

@@ -30,6 +30,11 @@ public class BundleServiceReadTest extends JerseyTest {
 	 */
 	@Test
 	public void testShouldReturnList() {
+		Bundle bundle = new Bundle();
+		bundle.setTitle("test location title");
+		target("bundle").request().post(Entity.entity(bundle, MediaType.APPLICATION_JSON_TYPE));
+
+		
 		final Response response = target("bundle").request().get();
 		Bundle[] bundles= response.readEntity(Bundle[].class);
 		Assert.assertTrue(bundles.length > 0);

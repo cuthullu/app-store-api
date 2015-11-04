@@ -51,6 +51,11 @@ public class BundleService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createBundle(Bundle bundle, @Context UriInfo uriInfo) throws ConstraintViolationException {
 		LOG.debug("creating bundle" + bundle);
+		System.out.println("\n\n");
+		System.out.println("///////////////////////////////////////");
+		System.out.println("Service class " + bundle.getId());
+		System.out.println("///////////////////////////////////////");
+		System.out.println("\n\n");
 		
 		Integer id = dao.createBundle(bundle);
 		
@@ -66,7 +71,7 @@ public class BundleService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateBundle(@PathParam("id") Integer id ,Bundle bundle) throws ConstraintViolationException{
 		LOG.debug("Updating bundle " + id);
-		bundle.setOutsideId(id);
+		bundle.setIdFromRemote(id);
 		dao.updateBundle(bundle);
 		return Response.ok().entity(bundle).build();
 		

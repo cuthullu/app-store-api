@@ -16,6 +16,6 @@ public interface UserDao {
 	
 	public User updateUser(User User);
 	
-	public boolean deleteUser(User user);
+	public boolean deleteUser(Integer id);
 	
 }

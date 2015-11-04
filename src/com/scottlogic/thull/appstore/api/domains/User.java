@@ -5,18 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 
 @Entity
 @Table( name = "User")
-public class User {
+public class User extends DomainObject<User>{
 	
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
-	@Column
+	@Column( unique = true)
 	private String username;
 	
 	@Column
@@ -28,15 +27,11 @@ public class User {
 	@Column
 	private String salt;
 	
-	@Transient
-	private Integer outsideId;
-	
-	public Integer getOutsideId() {
-		return this.outsideId;
-	}
-	
-	public void setOutsideId(Integer id){
-		this.outsideId = id;
+	public void update(User user) {
+		this.setPassword(user.getPassword());
+		this.setEmail(user.getEmail());
+		this.setSalt(user.getSalt());
+		this.setUsername(user.getUsername());
 	}
 	
 	public String getUsername() {
@@ -74,7 +69,5 @@ public class User {
 	public Integer getId() {
 		return id;
 	}
-	
-	
 	
 }

@@ -30,6 +30,11 @@ public class BundleServiceDeleteTest extends JerseyTest {
 	public void shouldReturnNoConentOnDelete() throws URISyntaxException{
 		Bundle bundle = new Bundle();
 		bundle.setTitle("test return title");
+		System.out.println("\n\n");
+		System.out.println("///////////////////////////////////////");
+		System.out.println("Test class bundle " + bundle.getId());
+		System.out.println("///////////////////////////////////////");
+		System.out.println("\n\n");
 		final Response createResponse = target("bundle").request().post(Entity.entity(bundle, MediaType.APPLICATION_JSON_TYPE));
 		String location = createResponse.getHeaderString("location");
 		location = new URI(location).getPath();

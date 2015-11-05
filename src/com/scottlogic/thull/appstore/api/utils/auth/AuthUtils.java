@@ -8,6 +8,8 @@ import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.scottlogic.thull.appstore.api.dao.UserDao;
+import com.scottlogic.thull.appstore.api.dao.hibernate.HibernateUserDao;
 import com.scottlogic.thull.appstore.api.domains.User;
 import com.scottlogic.thull.appstore.api.utils.HibernateUtil;
 
@@ -15,16 +17,14 @@ public class AuthUtils {
 
 	static final Logger LOG = LoggerFactory.getLogger(AuthUtils.class);
 
-	public void registrate(String username, String plainTextPassword) {
+	public static void registrate(String username, String plainTextPassword) {
 		User user = new User();
 		user.setUsername(username);
 
 		generatePassword(user, plainTextPassword);
 
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction tx = session.beginTransaction();
-		session.save(user);
-		tx.commit();
+		UserDao dao = new HibernateUserDao();
+		dao.createUser(user);
 
 		System.out.println("\n\n");
 		System.out.println("///////////////////////////////////////");
@@ -34,7 +34,7 @@ public class AuthUtils {
 		System.out.println("\n\n");
 	}
 
-	private void generatePassword(User user, String plainTextPassword) {
+	public static void generatePassword(User user, String plainTextPassword) {
 		RandomNumberGenerator rng = new SecureRandomNumberGenerator();
 		Object salt = rng.nextBytes();
 

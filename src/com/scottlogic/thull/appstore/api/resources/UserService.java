@@ -1,7 +1,9 @@
 package com.scottlogic.thull.appstore.api.resources;
 
 import java.util.List;
+import java.util.Map;
 
+import javax.validation.ConstraintViolationException;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -9,9 +11,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
@@ -21,6 +25,7 @@ import org.slf4j.LoggerFactory;
 import com.scottlogic.thull.appstore.api.dao.UserDao;
 import com.scottlogic.thull.appstore.api.dao.hibernate.HibernateUserDao;
 import com.scottlogic.thull.appstore.api.domains.User;
+import com.scottlogic.thull.appstore.api.utils.auth.AuthUtils;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/users")
@@ -48,10 +53,18 @@ public class UserService {
 	}
 	
 	@POST
-	public Response createUser(User user, @Context UriInfo uriInfo) {
+	public Response createUser(UserPasswordHolder uph, @Context UriInfo uriInfo) throws ConstraintViolationException{
+		User user = uph.getUser();
+		String password = uph.getPassword();
+		if(password == null) {
+			
+			return Response.status(Status.BAD_REQUEST).entity("missing required field: password").build();
+		}
+		
 		LOG.debug("Post Create user request " + user);
 		
-		Integer id = dao.createUser(user);
+		AuthUtils.generatePassword(user, password);
+		Integer id= dao.createUser(user);
 		
 		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
 		builder.path(id.toString());

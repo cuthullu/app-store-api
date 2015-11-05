@@ -5,20 +5,32 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+
+import com.owlike.genson.annotation.JsonIgnore;
 
 
 @Entity
-@Table( name = "User")
+@Table( name = "User",
+	uniqueConstraints={@UniqueConstraint(columnNames = {"username"}, name = "username"), 
+	@UniqueConstraint(columnNames = {"email"}, name = "email")}
+)
 public class User extends DomainObject<User>{
 	
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
-	@Column( unique = true)
+	@NotNull
+	@Column//( unique = true)
 	private String username;
 	
-	@Column
+	@NotNull
+	@Email
+	@Column//( name = "email", unique = true)
 	private String email;
 	
 	@Column
@@ -50,6 +62,7 @@ public class User extends DomainObject<User>{
 		this.email = email;
 	}
 
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
@@ -58,6 +71,7 @@ public class User extends DomainObject<User>{
 		this.password = password;
 	}
 
+	@JsonIgnore
 	public String getSalt() {
 		return salt;
 	}

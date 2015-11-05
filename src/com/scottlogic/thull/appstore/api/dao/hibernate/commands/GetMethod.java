@@ -17,11 +17,6 @@ public class GetMethod<T> implements HibernateMethod<Integer, T> {
 
 	@Override
 	public T call(Session session, Integer input) {
-		System.out.println("\n\n");
-		System.out.println("///////////////////////////////////////");
-		System.out.println(type);
-		System.out.println("///////////////////////////////////////");
-		System.out.println("\n\n");
 		LOG.debug("Getting " + input, type);
 		return (T) session.get(type, input);
 	}

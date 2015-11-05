@@ -12,5 +12,6 @@
     <property name="hibernate.hbm2ddl.auto">update</property>
     <property name="show_sql">false</property>
     <mapping class="com.scottlogic.thull.appstore.api.domains.Bundle" />
+    <mapping class="com.scottlogic.thull.appstore.api.domains.User" />
 </session-factory>
 </hibernate-configuration>

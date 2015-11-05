@@ -18,11 +18,6 @@ public class GetAllMethod<T extends DomainObject<T>> implements HibernateMethod<
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> call(Session session, Integer input) {
-		System.out.println("\n\n");
-		System.out.println("///////////////////////////////////////");
-		System.out.println(type);
-		System.out.println("///////////////////////////////////////");
-		System.out.println("\n\n");
 		return session.createQuery("from " + type.getName()).list();
 	}
 

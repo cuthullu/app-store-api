@@ -9,7 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.scottlogic.thull.appstore.api.exception.mapper.ConstraintViolationMapper;
+import com.scottlogic.thull.appstore.api.exception.mapper.OtherConstraintViolationMapper;
 import com.scottlogic.thull.appstore.api.resources.BundleService;
+import com.scottlogic.thull.appstore.api.resources.UserService;
  
 public class ResourceLoader extends Application{
 	static final Logger LOG = LoggerFactory.getLogger(ResourceLoader.class);
@@ -21,6 +23,9 @@ public class ResourceLoader extends Application{
 
         classes.add(BundleService.class);
         LOG.info("BundleService resource added");
+        
+        classes.add(UserService.class);
+        LOG.info("UserService resource added");
         return classes;
     }
     
@@ -30,6 +35,7 @@ public class ResourceLoader extends Application{
         LOG.info("ResourceLoader request for singletons made");
         
         classes.add(new ConstraintViolationMapper());
+        classes.add(new OtherConstraintViolationMapper());
         LOG.info("ConstraintViolationMapper resource added");
         return classes;
     }

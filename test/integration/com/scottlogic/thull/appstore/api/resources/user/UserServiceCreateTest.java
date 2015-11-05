@@ -28,22 +28,12 @@ public class UserServiceCreateTest extends JerseyTest{
         return testApp;
     }
 	
-	static int uniqueCounter = 0;
-	
-	private String getNextName() {
-		String next = "test" + uniqueCounter;
-		uniqueCounter++;
-		return next;
-	}
-	
 	/**
 	 * Creation tests
 	 */
 	@Test
 	public void shouldCreateObjectOkAndLocation() {
-		User user = new User();
-		user.setUsername(getNextName());
-		user.setEmail( user.getUsername() + "@test.test");
+		User user = UserMaker.makeMeAUser();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", user);
@@ -58,9 +48,7 @@ public class UserServiceCreateTest extends JerseyTest{
 	
 	@Test
 	public void shouldReturnCreatedObject() {
-		User user = new User();
-		user.setUsername(getNextName());
-		user.setEmail( user.getUsername() + "@test.test");
+		User user = UserMaker.makeMeAUser();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", user);
@@ -77,9 +65,7 @@ public class UserServiceCreateTest extends JerseyTest{
 	
 	@Test
 	public void shouldNotReturnHashOrSaltFromCreatedObject() {
-		User user = new User();
-		user.setUsername(getNextName());
-		user.setEmail( user.getUsername() + "@test.test");
+		User user = UserMaker.makeMeAUser();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", user);
@@ -97,9 +83,7 @@ public class UserServiceCreateTest extends JerseyTest{
 	
 	@Test
 	public void shouldClientErrorOnNonUniqueUsername(){
-		User user = new User();
-		user.setUsername(getNextName());
-		user.setEmail( user.getUsername() + "@test.test");
+		User user = UserMaker.makeMeAUser();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", user);
@@ -109,7 +93,7 @@ public class UserServiceCreateTest extends JerseyTest{
 				.post(Entity.entity(map, MediaType.APPLICATION_JSON_TYPE));
 		
 		Assert.assertEquals(201, firstResponse.getStatus());
-		user.setEmail(getNextName() + "@test.test");
+		user.setEmail(UserMaker.getNextName() + "@test.test");
 		
 		final Response secondResponse = target("users").request()
 				.post(Entity.entity(map, MediaType.APPLICATION_JSON_TYPE));
@@ -119,9 +103,7 @@ public class UserServiceCreateTest extends JerseyTest{
 	
 	@Test
 	public void shouldReturnUsefulMessageOnNonUniqueUsername(){
-		User user = new User();
-		user.setUsername(getNextName());
-		user.setEmail( user.getUsername() + "@test.test");
+		User user = UserMaker.makeMeAUser();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", user);
@@ -131,7 +113,7 @@ public class UserServiceCreateTest extends JerseyTest{
 				.post(Entity.entity(map, MediaType.APPLICATION_JSON_TYPE));
 		
 		Assert.assertEquals(201, firstResponse.getStatus());
-		user.setEmail(getNextName() + "@test.test");
+		user.setEmail(UserMaker.getNextName() + "@test.test");
 		
 		final Response secondResponse = target("users").request()
 				.post(Entity.entity(map, MediaType.APPLICATION_JSON_TYPE));
@@ -141,9 +123,7 @@ public class UserServiceCreateTest extends JerseyTest{
 	
 	@Test
 	public void shouldClientErrorOnNonUniqueEmail(){
-		User user = new User();
-		user.setUsername(getNextName());
-		user.setEmail( user.getUsername() + "@test.test");
+		User user = UserMaker.makeMeAUser();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", user);
@@ -153,7 +133,7 @@ public class UserServiceCreateTest extends JerseyTest{
 				.post(Entity.entity(map, MediaType.APPLICATION_JSON_TYPE));
 		
 		Assert.assertEquals(201, firstResponse.getStatus());
-		user.setUsername(getNextName());
+		user.setUsername(UserMaker.getNextName());
 		
 		final Response secondResponse = target("users").request()
 				.post(Entity.entity(map, MediaType.APPLICATION_JSON_TYPE));
@@ -163,9 +143,7 @@ public class UserServiceCreateTest extends JerseyTest{
 	
 	@Test
 	public void shouldReturnUsefulMessageOnNonUniqueEmail(){
-		User user = new User();
-		user.setUsername(getNextName());
-		user.setEmail( user.getUsername() + "@test.test");
+		User user = UserMaker.makeMeAUser();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", user);
@@ -175,7 +153,7 @@ public class UserServiceCreateTest extends JerseyTest{
 				.post(Entity.entity(map, MediaType.APPLICATION_JSON_TYPE));
 		
 		Assert.assertEquals(201, firstResponse.getStatus());
-		user.setUsername(getNextName());
+		user.setUsername(UserMaker.getNextName());
 		
 		final Response secondResponse = target("users").request()
 				.post(Entity.entity(map, MediaType.APPLICATION_JSON_TYPE));
@@ -185,8 +163,8 @@ public class UserServiceCreateTest extends JerseyTest{
 	
 	@Test
 	public void shouldClientErrorOnNullUsername(){
-		User user = new User();
-		user.setEmail( getNextName() + "@test.test");
+		User user = UserMaker.makeMeAUser();
+		user.setUsername(null);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", user);
@@ -200,8 +178,8 @@ public class UserServiceCreateTest extends JerseyTest{
 	
 	@Test
 	public void shouldReturnUsefulMessageOnNullUsername(){
-		User user = new User();
-		user.setEmail( getNextName() + "@test.test");
+		User user = UserMaker.makeMeAUser();
+		user.setUsername(null);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", user);
@@ -215,8 +193,8 @@ public class UserServiceCreateTest extends JerseyTest{
 	
 	@Test
 	public void shouldClientErrorOnNullEmail(){
-		User user = new User();
-		user.setUsername( getNextName());
+		User user = UserMaker.makeMeAUser();
+		user.setEmail(null);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", user);
@@ -230,8 +208,8 @@ public class UserServiceCreateTest extends JerseyTest{
 	
 	@Test
 	public void shouldReturnUsefulMessageOnNullEmail(){
-		User user = new User();
-		user.setUsername( getNextName());
+		User user = UserMaker.makeMeAUser();
+		user.setEmail(null);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", user);
@@ -245,8 +223,7 @@ public class UserServiceCreateTest extends JerseyTest{
 	
 	@Test
 	public void shouldClientErrorOnNullPassword(){
-		User user = new User();
-		user.setUsername( getNextName());
+		User user = UserMaker.makeMeAUser();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", user);
@@ -259,8 +236,7 @@ public class UserServiceCreateTest extends JerseyTest{
 	
 	@Test
 	public void shouldReturnUsefulMessageOnNullPassword(){
-		User user = new User();
-		user.setUsername( getNextName());
+		User user = UserMaker.makeMeAUser();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", user);
@@ -273,8 +249,7 @@ public class UserServiceCreateTest extends JerseyTest{
 	
 	@Test
 	public void shouldClientErrorOnNonValidEmail(){
-		User user = new User();
-		user.setUsername( getNextName());
+		User user = UserMaker.makeMeAUser();
 		user.setEmail("email");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -289,8 +264,7 @@ public class UserServiceCreateTest extends JerseyTest{
 	
 	@Test
 	public void shouldReturnUsefulMessageOnNonValidEmail(){
-		User user = new User();
-		user.setUsername( getNextName());
+		User user = UserMaker.makeMeAUser();
 		user.setEmail("email");
 		
 		Map<String, Object> map = new HashMap<String, Object>();

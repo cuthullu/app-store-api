@@ -71,5 +71,27 @@ public class UserServiceUpdateTest extends JerseyTest {
 		Assert.assertEquals(user.getId(), updatedUser.getId());
 	}
 	
+	@Test
+	public void shouldReturnClientErrorWithNullUsername() {
+		user.setUsername(null);
+		final Response response = target(location).request()
+				.put(Entity.entity(user, MediaType.APPLICATION_JSON_TYPE));
+		
+		String message = response.readEntity(String.class);
+		Assert.assertEquals(400, response.getStatus());
+		Assert.assertTrue(message.contains("username"));
+	}
+	
+	@Test
+	public void shouldReturnClientErrorWithNullEmail() {
+		user.setEmail(null);
+		final Response response = target(location).request()
+				.put(Entity.entity(user, MediaType.APPLICATION_JSON_TYPE));
+		
+		String message = response.readEntity(String.class);
+		Assert.assertEquals(400, response.getStatus());
+		Assert.assertTrue(message.contains("email"));
+	}
+	
 }
 

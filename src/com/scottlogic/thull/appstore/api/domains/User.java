@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 
 import com.owlike.genson.annotation.JsonIgnore;
-import com.owlike.genson.annotation.JsonProperty;
 
 
 @Entity

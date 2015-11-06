@@ -1,8 +1,5 @@
 package integration.com.scottlogic.thull.appstore.api.resources.user;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;

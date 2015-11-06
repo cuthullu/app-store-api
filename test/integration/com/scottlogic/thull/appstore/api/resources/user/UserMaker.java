@@ -16,6 +16,7 @@ public class UserMaker {
 		User user = new User();
 		user.setUsername(getNextName());
 		user.setEmail( user.getUsername() + "@test.test");
+		user.setPassword("password");
 		
 		return user;
 	}

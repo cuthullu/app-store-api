@@ -15,6 +15,8 @@ import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.owlike.genson.Genson;
+import com.owlike.genson.GensonBuilder;
 import com.scottlogic.thull.appstore.api.domains.User;
 import com.scottlogic.thull.appstore.api.exception.mapper.ConstraintViolationMapper;
 import com.scottlogic.thull.appstore.api.exception.mapper.OtherConstraintViolationMapper;
@@ -51,13 +53,11 @@ public class UserServiceReadTest extends JerseyTest {
 	@Test
 	public void shouldGetUserFromLocation() throws URISyntaxException {
 		User user = UserMaker.makeMeAUser();
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("user", user);
-		map.put("password", "password");
+		Genson gs = new GensonBuilder().include("password").create();
+		String userString = gs.serialize(user);
 
 		final Response createResponse = target("users").request()
-				.post(Entity.entity(map, MediaType.APPLICATION_JSON_TYPE));
+				.post(Entity.entity(userString, MediaType.APPLICATION_JSON_TYPE));
 
 		String location = createResponse.getHeaderString("location");
 		location = new URI(location).getPath();
@@ -80,13 +80,11 @@ public class UserServiceReadTest extends JerseyTest {
 	@Test
 	public void shouldNotHaveHashOrSaltInReturnObject() throws URISyntaxException {
 		User user = UserMaker.makeMeAUser();
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("user", user);
-		map.put("password", "password");
+		Genson gs = new GensonBuilder().include("password").create();
+		String userString = gs.serialize(user);
 
 		final Response createResponse = target("users").request()
-				.post(Entity.entity(map, MediaType.APPLICATION_JSON_TYPE));
+				.post(Entity.entity(userString, MediaType.APPLICATION_JSON_TYPE));
 
 		String location = createResponse.getHeaderString("location");
 		location = new URI(location).getPath();

@@ -22,6 +22,7 @@ import javax.ws.rs.core.UriInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.owlike.genson.Genson;
 import com.scottlogic.thull.appstore.api.dao.UserDao;
 import com.scottlogic.thull.appstore.api.dao.hibernate.HibernateUserDao;
 import com.scottlogic.thull.appstore.api.domains.User;
@@ -53,9 +54,8 @@ public class UserService {
 	}
 	
 	@POST
-	public Response createUser(UserPasswordHolder uph, @Context UriInfo uriInfo) throws ConstraintViolationException{
-		User user = uph.getUser();
-		String password = uph.getPassword();
+	public Response createUser(User user, @Context UriInfo uriInfo) throws ConstraintViolationException{
+		String password = user.getPassword();
 		if(password == null) {
 			
 			return Response.status(Status.BAD_REQUEST).entity("missing required field: password").build();
@@ -68,6 +68,7 @@ public class UserService {
 		
 		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
 		builder.path(id.toString());
+
 		return Response.created(builder.build()).entity(user).build();
 	}
 	
@@ -75,6 +76,12 @@ public class UserService {
 	@Path("{id}")
 	public Response updateUser(@PathParam("id") Integer id , User user) {
 		LOG.debug("Updating User: " + id);
+		if(user.getPassword() != null) {
+			AuthUtils.generatePassword(user, user.getPassword());
+		}else {
+			user.setSalt(null);
+		}
+		
 		user.setIdFromRemote(id);
 		user = dao.updateUser(user);
 		

@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 
 import com.owlike.genson.annotation.JsonIgnore;
+import com.owlike.genson.annotation.JsonProperty;
 
 
 @Entity
@@ -25,12 +26,12 @@ public class User extends DomainObject<User>{
 	private Integer id;
 	
 	@NotNull
-	@Column//( unique = true)
+	@Column
 	private String username;
 	
 	@NotNull
 	@Email
-	@Column//( name = "email", unique = true)
+	@Column
 	private String email;
 	
 	@Column
@@ -40,10 +41,12 @@ public class User extends DomainObject<User>{
 	private String salt;
 	
 	public void update(User user) {
-		this.setPassword(user.getPassword());
 		this.setEmail(user.getEmail());
-		this.setSalt(user.getSalt());
 		this.setUsername(user.getUsername());
+		if(user.getPassword() != null && user.getSalt() != null) {
+			this.setPassword(user.getPassword());
+			this.setSalt(user.getSalt());
+		}
 	}
 	
 	public String getUsername() {
@@ -61,12 +64,12 @@ public class User extends DomainObject<User>{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	@JsonIgnore
+	@JsonIgnore(serialize=false,deserialize=true)
 	public String getPassword() {
 		return password;
 	}
-
+	
+	@JsonIgnore(serialize=false,deserialize=true)
 	public void setPassword(String password) {
 		this.password = password;
 	}

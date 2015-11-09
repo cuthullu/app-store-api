@@ -11,11 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.scottlogic.thull.appstore.api.dao.UserDao;
+import com.scottlogic.thull.appstore.api.dao.hibernate.HibernateUserDao;
 import com.scottlogic.thull.appstore.api.domains.User;
 
 public class SaltedCustomRealm extends JdbcRealm {
 	static final Logger LOG = LoggerFactory.getLogger(SaltedCustomRealm.class);
-	private UserDao userDao;
+	private UserDao userDao = new HibernateUserDao();
 	
 	@Override
 	public AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException{

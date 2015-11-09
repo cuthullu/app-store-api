@@ -18,7 +18,7 @@ public class UserRole {
 	private String roleName;
 	
 	@Column
-	private String email;
+	private String username;
 
 	public String getRoleName() {
 		return roleName;
@@ -28,12 +28,12 @@ public class UserRole {
 		this.roleName = roleName;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public Integer getId() {

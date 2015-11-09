@@ -13,5 +13,7 @@
     <property name="show_sql">false</property>
     <mapping class="com.scottlogic.thull.appstore.api.domains.Bundle" />
     <mapping class="com.scottlogic.thull.appstore.api.domains.User" />
+    <mapping class="com.scottlogic.thull.appstore.api.domains.UserRole" />
+    <mapping class="com.scottlogic.thull.appstore.api.domains.UserPermission" />
 </session-factory>
 </hibernate-configuration>

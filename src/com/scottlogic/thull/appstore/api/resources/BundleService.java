@@ -1,6 +1,5 @@
 package com.scottlogic.thull.appstore.api.resources;
 
-import java.net.URI;
 import java.util.List;
 
 import javax.validation.ConstraintViolationException;
@@ -67,7 +66,7 @@ public class BundleService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateBundle(@PathParam("id") Integer id ,Bundle bundle) throws ConstraintViolationException{
 		LOG.debug("Updating bundle " + id);
-		bundle.setOutsideId(id);
+		bundle.setIdFromRemote(id);
 		dao.updateBundle(bundle);
 		return Response.ok().entity(bundle).build();
 		

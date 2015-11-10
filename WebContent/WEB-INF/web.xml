@@ -3,6 +3,10 @@
 <web-app>
 
     <display-name>Todo </display-name>
+    <context-param>
+        <param-name>shiroConfigLocations</param-name>
+        <param-value>classpath:shiro.ini</param-value>
+    </context-param>
 
     <context-param>
         <param-name>resteasy.scan</param-name>
@@ -15,15 +19,23 @@
     </context-param>
 
     <listener>
-        <listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
+        <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener
+        </listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
+        </listener-class>
     </listener>
 
     <servlet>
         <servlet-name>resteasy-servlet</servlet-name>
-        <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+        <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+        </servlet-class>
         <init-param>
             <param-name>javax.ws.rs.Application</param-name>
-            <param-value>com.scottlogic.thull.appstore.api.ResourceLoader</param-value>
+            <param-value>com.scottlogic.thull.appstore.api.ResourceLoader
+            </param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
 
@@ -33,5 +45,21 @@
         <servlet-name>resteasy-servlet</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>ShiroFilter</filter-name>
+        <filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>ShiroFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <context:component-scan base-package="com.pepsey.soft.web.controller"/>
 
 </web-app>

@@ -1,8 +1,7 @@
-package integration.com.scottlogic.thull.appstore.api.resources;
+package integration.com.scottlogic.thull.appstore.api.resources.bundle;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
@@ -31,6 +30,11 @@ public class BundleServiceReadTest extends JerseyTest {
 	 */
 	@Test
 	public void testShouldReturnList() {
+		Bundle bundle = new Bundle();
+		bundle.setTitle("test location title");
+		target("bundle").request().post(Entity.entity(bundle, MediaType.APPLICATION_JSON_TYPE));
+
+		
 		final Response response = target("bundle").request().get();
 		Bundle[] bundles= response.readEntity(Bundle[].class);
 		Assert.assertTrue(bundles.length > 0);
@@ -51,7 +55,7 @@ public class BundleServiceReadTest extends JerseyTest {
 		
 		
 		Assert.assertEquals(200, getResponse.getStatus());
-		Assert.assertEquals(bundle.getId(), bundle.getId());
+		Assert.assertEquals(bundle.getId(), gottenBundle.getId());
 	}
 	
 	@Test

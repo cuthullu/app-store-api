@@ -17,8 +17,7 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
+import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,6 +52,8 @@ public class UserService {
 	}
 	
 	@POST
+	@RequiresGuest
+	//@Path("create")
 	public Response createUser(User user, @Context UriInfo uriInfo) throws ConstraintViolationException{
 		String password = user.getPassword();
 		if(password == null) {

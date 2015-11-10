@@ -8,7 +8,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.Email;
 
 import com.owlike.genson.annotation.JsonIgnore;
@@ -19,7 +18,6 @@ import com.owlike.genson.annotation.JsonIgnore;
 	uniqueConstraints={@UniqueConstraint(columnNames = {"username"}, name = "username"), 
 	@UniqueConstraint(columnNames = {"email"}, name = "email")}
 )
-@JsonIgnoreProperties( { "salt", "password"})
 public class User extends DomainObject<User>{
 	
 	@Id
